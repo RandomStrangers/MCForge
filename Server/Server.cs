@@ -38,7 +38,6 @@ namespace MCForge
     public class Server
     {
        // public static GlobalChatBot GlobalChat;
-        public string IRCNickServName = "NickServ";
         public bool IRCSSL = true;
         public static string SourceURL = "https://github.com/RandomStrangers/MCForge/";
         public static bool cancelcommand = false;
