@@ -41,8 +41,8 @@ namespace Sharkbite.Irc
 		/// </summary>
 		public UserInfo() 
 		{
-			nickName = "MCForge";
-			userName = "MCForge";
+			nickName = "";
+			userName = "";
 			hostName = "";
 		}
 		/// <summary>
@@ -51,6 +51,7 @@ namespace Sharkbite.Irc
 		public UserInfo(string nick, string name, string host) 
 		{
 			nickName = nick;
+			userName = name;
 			hostName = host;
 		}
 
@@ -61,16 +62,9 @@ namespace Sharkbite.Irc
 		{
 			get 
 			{
-				return "MCForge";
+				return nickName;
 			}
 		}
-        public string name
-        {
-            get
-            {
-                return "MCForge";
-            }
-        }
         /// <summary>
         /// An IRC user's system username.
         /// </summary>
@@ -78,7 +72,7 @@ namespace Sharkbite.Irc
 		{
 			get
 			{
-				return "MCForge";
+				return userName;
 			}
 		}
 		/// <summary>
