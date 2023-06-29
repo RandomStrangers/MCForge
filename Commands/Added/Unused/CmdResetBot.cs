@@ -30,10 +30,11 @@ namespace MCForge.Commands
         public override void Use(Player p, string message)
         {
             Server.IRC.Reset();
+            Server.OPIRC.Reset();
         }
         public override void Help(Player p)
         {
-            Player.SendMessage(p, "/resetbot - reloads the IRCBot. FOR EMERGENCIES ONLY!");
+            Player.SendMessage(p, "/resetbot - reloads the IRCBots. FOR EMERGENCIES ONLY!");
         }
     }
 }

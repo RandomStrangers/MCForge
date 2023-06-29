@@ -159,6 +159,7 @@
     </Compile>
     <Compile Include="Heartbeat\BetaCraftBeat2.cs" />
     <Compile Include="Heartbeat\ClassiCubeBeat2.cs" />
+    <Compile Include="IRC\ForgeBot-staff.cs" />
     <Compile Include="Player\Added\Player.CPE.cs" />
     <Compile Include="Player\Opcode.cs" />
     <Compile Include="Player\Player.CPE.cs" />

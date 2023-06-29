@@ -73,6 +73,7 @@ namespace MCForge
         public event PlayerListHandler OnPlayerListChange;
         public event VoidHandler OnSettingsUpdate;
         public static ForgeBot IRC;
+        public static StaffIRCBot OPIRC;
         public static Thread locationChecker;
         public static bool UseTextures = false;
         public static Thread blockThread;
@@ -112,6 +113,7 @@ namespace MCForge
         public static PlayerList bannedIP;
         public static PlayerList whiteList;
         public static PlayerList ircControllers;
+        public static PlayerList opircControllers;
         public static PlayerList muted;
         public static PlayerList ignored;
 
@@ -161,6 +163,7 @@ namespace MCForge
         public struct levelID { public int ID; public string name; }
         public static List<string> afkset = new List<string>();
         public static List<string> ircafkset = new List<string>();
+        public static List<string> opircafkset = new List<string>();
         public static List<string> afkmessages = new List<string>();
         public static List<string> messages = new List<string>();
 
@@ -263,7 +266,7 @@ namespace MCForge
         /// SoftwareName2 and SoftwareNameVersioned2 are for Betacraft heartbeats 
         /// since BetaCraft doesn't allow MCForge to connect using its default SoftwareName.
         /// </summary>
-        public const string InternalVersion = "5.5.0.5";
+        public const string InternalVersion = "5.5.0.6";
         public static string UpdateVersion { get { return InternalVersion + 0.1; } }
         public static string Version { get { return InternalVersion; } }
         public static string SoftwareName2 = "MCGalaxy";
@@ -328,9 +331,17 @@ namespace MCForge
         public static string ircNick = "MCForge";
         public static string ircServer = "irc.esper.net";
         public static string ircChannel = "#MCForge-irc";
-        public static string ircOpChannel = "#MCForge-op-irc";
         public static bool ircIdentify = true;
         public static string ircPassword = "ForgeBot(Forging_the_way)";
+        public static bool opirc = false;
+        public static bool opircColorsEnable = true;
+        //        public static bool safemode = false; //Never used
+        public static int opircPort = 6697;
+        public static string opircNick = "MCForge";
+        public static string opircServer = "irc.esper.net";
+        public static string ircOpChannel = "#MCForge-op-irc";
+        public static bool opircIdentify = true;
+        public static string opircPassword = "ForgeBot(Forging_the_way)";
         public static bool verifyadmins = true;
         public static LevelPermission verifyadminsrank = LevelPermission.Operator;
 
@@ -366,7 +377,8 @@ namespace MCForge
 
         public static string DefaultColor = "&e";
         public static string IRCColour = "&5";
-        
+        public static string OPIRCColour = "&4";
+
         public static bool UseGlobalChat = true;
         public static string GlobalChatNick = "MCF" + new Random().Next();
         public static string GlobalChatColor = "&6";
@@ -751,6 +763,7 @@ namespace MCForge
             {
                 bannedIP = PlayerList.Load("banned-ip.txt", null);
                 ircControllers = PlayerList.Load("IRC_Controllers.txt", null);
+                opircControllers = PlayerList.Load("OPIRC_Controllers.txt", null);
                 muted = PlayerList.Load("muted.txt", null);
 
                 foreach (Group grp in Group.GroupList)
@@ -909,9 +922,11 @@ namespace MCForge
                 else File.Create("text/messages.txt").Close();
                 // We always construct this to prevent errors...
                 IRC = new ForgeBot(Server.ircChannel, Server.ircOpChannel, Server.ircServer);
+                OPIRC = new StaffIRCBot(Server.ircOpChannel, Server.opircServer);
                 //GlobalChat = new GlobalChatBot(GlobalChatNick);
 
                 if (Server.irc) IRC.Connect();
+                if (Server.irc) OPIRC.Connect();
                 //if (Server.UseGlobalChat) GlobalChat.Connect();
                 // OmniBan stuff!
                 new Thread(new ThreadStart(() => omniban.Load(true))).Start();

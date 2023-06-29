@@ -264,18 +264,21 @@ namespace MCForge_.Gui
                         msg = String.Format("To Ops -{0}Console [&a{1}{0}]&f- {2}", Server.DefaultColor, Server.ZallState, s);
                         Player.GlobalMessageOps(msg);
                         Server.IRC.Say(msg, true);
+                        Server.OPIRC.Say(msg, true);
                     }
                     else if (s[0] == '+')
                     {
                         msg = String.Format("To Admins -{0}Console [&a{1}{0}]&f- {2}", Server.DefaultColor, Server.ZallState, s);
                         Player.GlobalMessageAdmins(msg);
                         Server.IRC.Say(msg, true);
+                        Server.OPIRC.Say(msg, true);
                     }
                     else
                     {
                         msg = String.Format("{0}Console [&a{1}{0}]: &f{2}", Server.DefaultColor, Server.ZallState, s);
                         Player.GlobalMessage(msg);
                         Server.IRC.Say(msg);
+                        Server.OPIRC.Say(msg);
                     }
                     WriteToConsole(msg);
                 }
