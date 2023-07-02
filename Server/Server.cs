@@ -266,7 +266,7 @@ namespace MCForge
         /// SoftwareName2 and SoftwareNameVersioned2 are for Betacraft heartbeats 
         /// since BetaCraft doesn't allow MCForge to connect using its default SoftwareName.
         /// </summary>
-        public const string InternalVersion = "5.5.0.6";
+        public const string InternalVersion = "5.5.0.7";
         public static string UpdateVersion { get { return InternalVersion + 0.1; } }
         public static string Version { get { return InternalVersion; } }
         public static string SoftwareName2 = "MCGalaxy";
@@ -292,7 +292,6 @@ namespace MCForge
         public static string salt4 = salt;
 
         public static string name = "[MCForge] Default";
-        public static string name2 = "[MCForge] Default2";
         public static string motd = "Welcome!";
 		public static string textureUrl = "";
         public static byte players = 12;
@@ -1152,6 +1151,7 @@ namespace MCForge
             try
             {
                 IRC.Disconnect(!AutoRestart ? "Server is shutting down." : "Server is restarting.");
+                OPIRC.Disconnect(!AutoRestart ? "Server is shutting down." : "Server is restarting.");
             }
             catch { }
         }

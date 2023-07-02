@@ -79,7 +79,6 @@ namespace MCForge {
             color = "&" + newColor;
             MOTD = motd;
             fileName = file;
-            playerList = name != "nobody" ? PlayerList.Load(fileName, this) : new PlayerList();
             if (OnGroupLoaded != null)
                 OnGroupLoaded(this);
             OnGroupLoadedEvent.Call(this);
@@ -239,7 +238,7 @@ namespace MCForge {
             if (GroupList.Find(grp => grp.Permission == LevelPermission.Operator) == null) GroupList.Add(new Group(LevelPermission.Operator, 2500, 5400, "Operator", 'c', String.Empty, "operators.txt"));
             if (GroupList.Find(grp => grp.Permission == LevelPermission.Admin) == null) GroupList.Add(new Group(LevelPermission.Admin, 65536, int.MaxValue, "SuperOP", 'e', String.Empty, "uberOps.txt"));
             if (GroupList.Find(grp => grp.Permission == LevelPermission.Console) == null) GroupList.Add(new Group(LevelPermission.Console, int.MaxValue, int.MaxValue, "Console", '0', String.Empty, "Console.txt"));
-            GroupList.Add(new Group(LevelPermission.Nobody, 65536, -1, "Nobody", '0', String.Empty, "nobody.txt"));
+            GroupList.Add(new Group(LevelPermission.Nobody, int.MaxValue, -1, "Nobody", '0', String.Empty, "nobody.txt"));
 
             bool swap = true; Group storedGroup;
             while (swap) {

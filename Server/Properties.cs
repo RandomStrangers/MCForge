@@ -310,7 +310,47 @@ if (!skipsalt)
                                     case "irc-password":
                                         Server.ircPassword = value;
                                         break;
-                                    case "anti-tunnels":
+
+                                case "opirc":
+                                    Server.opirc = (value.ToLower() == "true") ? true : false;
+                                    break;
+                                case "opirc-colorsenable":
+                                    Server.opircColorsEnable = (value.ToLower() == "true") ? true : false;
+                                    break;
+                                case "opirc-server":
+                                    Server.opircServer = value;
+                                    break;
+                                case "opirc-nick":
+                                    Server.opircNick = value;
+                                    break;
+                                case "opirc-opchannel":
+                                    Server.ircOpChannel = value;
+                                    break;
+                                case "opirc-port":
+                                    try
+                                    {
+                                        Server.opircPort = Convert.ToInt32(value);
+                                    }
+                                    catch
+                                    {
+                                        Server.s.Log("opirc-port invalid! setting to default.");
+                                    }
+                                    break;
+                                case "opirc-identify":
+                                    try
+                                    {
+                                        Server.opircIdentify = Convert.ToBoolean(value);
+                                    }
+                                    catch
+                                    {
+                                        Server.s.Log("opirc-identify boolean value invalid! Setting to the default of: " + Server.opircIdentify + ".");
+                                    }
+                                    break;
+                                case "opirc-password":
+                                    Server.opircPassword = value;
+                                    break;
+
+                                case "anti-tunnels":
                                         Server.antiTunnel = (value.ToLower() == "true") ? true : false;
                                         break;
                                     case "max-depth":

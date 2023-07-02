@@ -115,6 +115,9 @@ namespace MCForge
                     case "MessageTypes":
                         MessageTypes = version;
                         break;
+                    case "TwoWayPing":
+                        TwoWayPing = version;
+                        break;
                 }
             }
         }
@@ -138,6 +141,7 @@ namespace MCForge
                 case "HackControl": return HackControl == version;
                 case "EmoteFix": return EmoteFix == version;
                 case "MessageTypes": return MessageTypes == version;
+                case "TwoWayPing": return TwoWayPing == version;
                 default: return false;
             }
         }

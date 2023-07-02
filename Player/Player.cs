@@ -663,7 +663,7 @@ namespace MCForge
         public bool isProtected;
         public bool verifiedName;
 
-        public string appName;
+        public static string appName;
         public int extensionCount;
         public List<string> extensions = new List<string>();
         public int customBlockSupportLevel;
@@ -737,7 +737,7 @@ namespace MCForge
                 else
                     exIP = ip;
 
-                Server.s.Log(name + "(" + ip + ")" + " connected to the server.");
+                Server.s.Log(name + "(" + ip + ")" + " connected to the server using "+ Player.appName + ".");
 
                 for (byte i = 0; i < 128; ++i) bindings[i] = i;
 
@@ -1328,7 +1328,7 @@ namespace MCForge
                     SendExtEntry("EnvWeatherType", 1);
                     SendExtEntry("HackControl", 1);
                     SendExtEntry("EmoteFix", 1);
-                    SendExtEntry("MessageTypes", 1);
+                    SendExtEntry("LongerMessages", 1);
                     SendCustomBlockSupportLevel(1);
                 }
 
@@ -1978,7 +1978,7 @@ namespace MCForge
 
         public void manualChange(ushort x, ushort y, ushort z, byte action, ushort type)
         {
-            if (type > 65)
+            if (type > 256)
             {
                 Kick("Unknown block type!");
                 return;
@@ -3468,7 +3468,7 @@ try { SendBlockchange(pos1.x, pos1.y, pos1.z, Block.waterstill); } catch { }
                     Server.s.Log("(OPs): " + name + ": " + newtext);
                     //Server.s.OpLog("(OPs): " + name + ": " + newtext);
                     //IRCBot.Say(name + ": " + newtext, true);
-                    //Server.IRC.Say(name + ": " + newtext, true);
+                    Server.IRC.Say(name + ": " + newtext, true);
                     return;
                 }
                 if (text[0] == '+' || adminchat)
@@ -3480,7 +3480,7 @@ try { SendBlockchange(pos1.x, pos1.y, pos1.z, Block.waterstill); } catch { }
                     if (group.Permission < Server.adminchatperm && !isStaff)
                         SendMessage("To Admins &f-" + color + name + "&f- " + newtext);
                     Server.s.Log("(Admins): " + name + ": " + newtext);
-                   // Server.IRC.Say(name + ": " + newtext, true);
+                    Server.IRC.Say(name + ": " + newtext, true);
                     return;
                 }
 
@@ -3961,10 +3961,10 @@ return;
                 }
                 else
                 {
-                    //if (!Server.irc || String.IsNullOrEmpty(Server.IRC.usedCmd))
+                    if (!Server.irc || String.IsNullOrEmpty(Server.IRC.usedCmd))
                         Server.s.Log(message);
-                    //else
-                       // Server.IRC.Pm(Server.IRC.usedCmd, message);
+                    else
+                       Server.IRC.Pm(Server.IRC.usedCmd, message);
                     //IRCBot.Say(message, true);
                 }
                 return;
@@ -4424,9 +4424,9 @@ rot = new byte[2] { rotx, roty };*/
             HTNO(id).CopyTo(buffer, 0);
             StringFormat(name, 64).CopyTo(buffer, 2);
             if (displayname == "") { displayname = name; }
-            StringFormat(displayname, 64).CopyTo(buffer, 66);
-            StringFormat(grp.color + grp.name.ToUpper() + "s:", 64).CopyTo(buffer, 130);
-            buffer[194] = (byte)grp.Permission.GetHashCode();
+           // StringFormat(displayname, 64).CopyTo(buffer, 66);
+           //StringFormat(grp.color + grp.name.ToUpper() + "s:", 64).CopyTo(buffer, 130);
+            //buffer[194] = (byte)grp.Permission.GetHashCode();
             SendRaw(OpCode.ExtAddPlayerName, buffer);
         }
 
