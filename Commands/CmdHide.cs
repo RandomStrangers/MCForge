@@ -15,9 +15,12 @@
 	or implied. See the Licenses for the specific language governing
 	permissions and limitations under the Licenses.
 */
+using System.Drawing;
 using System.IO;
+using static MCForge.Player;
 namespace MCForge.Commands
 {
+
     public class CmdHide : Command
     {
         public override string name { get { return "hide"; } }
@@ -57,7 +60,8 @@ namespace MCForge.Commands
             {
                 Player.GlobalDie(p, true);
                 Player.GlobalMessageOps("To Ops -" + p.color + p.name + "-" + Server.DefaultColor + " is now &finvisible" + Server.DefaultColor + ".");
-                Player.GlobalChat(p, "&c- " + p.color + p.prefix + p.name + Server.DefaultColor + " " + (File.Exists("text/logout/" + p.name + ".txt") ? File.ReadAllText("text/logout/" + p.name + ".txt") : "Disconnected."), false);
+                string leavem1 = "&c- " + p.color + p.prefix + p.DisplayName + Server.DefaultColor + " " + File.ReadAllText("text/logout/" + p.name + ".txt");
+                GlobalMessage(leavem1);
                 //Server.IRC.Say(p.name + " left the game (Disconnected.)");
                 if (!p.opchat)
                 {
@@ -69,7 +73,8 @@ namespace MCForge.Commands
             {
                 Player.GlobalSpawn(p, p.pos[0], p.pos[1], p.pos[2], p.rot[0], p.rot[1], false);
                 Player.GlobalMessageOps("To Ops -" + p.color + p.name + "-" + Server.DefaultColor + " is now &8visible" + Server.DefaultColor + ".");
-                Player.GlobalChat(p, "&a+ " + p.color + p.prefix + p.name + Server.DefaultColor + " " + (File.Exists("text/login/" + p.name + ".txt") ? File.ReadAllText("text/login/" + p.name + ".txt") : "joined the game."), false);
+                string joinm1 = "&a+ " + p.color + p.prefix + p.DisplayName + Server.DefaultColor + " " + File.ReadAllText("text/login/" + p.name + ".txt");
+                GlobalMessage(joinm1);
                 //Server.IRC.Say(p.name + " joined the game");
                 if (p.opchat)
                 {

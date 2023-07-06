@@ -42,6 +42,7 @@ namespace MCForge
                         break;
                     case "ExtPlayerList":
                         ExtPlayerList = version;
+#if LIST_BROKE
                         spawned = true;
                         if (version > 0)
                             Player.players.ForEach(delegate(Player p)
@@ -55,7 +56,7 @@ namespace MCForge
                                     SendExtAddPlayerName(p.id, p.name, p.group, p.color + p.name);
                                 }
                             });
-
+                        
                         try
                         {
                             ushort x = (ushort)((0.5 + level.spawnx) * 32);
@@ -87,6 +88,7 @@ namespace MCForge
                             Server.ErrorLog(e);
                             Server.s.Log("Error spawning player \"" + name + "\"");
                         }
+#endif
                         break;
                     case "EnvColors":
                         EnvColors = version;
@@ -131,7 +133,7 @@ namespace MCForge
                 case "CustomBlocks": return CustomBlocks == version;
                 case "HeldBlock": return HeldBlock == version;
                 case "TextHotKey": return TextHotKey == version;
-                case "ExtPlayerList": return ExtPlayerList == version;
+               // case "ExtPlayerList": return ExtPlayerList == version;
                 case "EnvColors": return EnvColors == version;
                 case "SelectionCuboid": return SelectionCuboid == version;
                 case "BlockPermissions": return BlockPermissions == version;

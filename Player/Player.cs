@@ -29,6 +29,7 @@ using System.Text.RegularExpressions;
 using System.Timers;
 using System.Threading;
 using Newtonsoft.Json.Linq;
+using static MCForge.Economy.Settings;
 
 
 namespace MCForge
@@ -940,7 +941,7 @@ namespace MCForge
                 p.buffer = p.HandleMessage(b);
                 if (p.dontmindme && p.buffer.Length == 0)
                 {
-                    Server.s.Log("Disconnected");
+                    Server.s.Log("disconnected");
                     p.socket.Close();
                     p.disconnected = true;
                     return;
@@ -1448,7 +1449,11 @@ namespace MCForge
 				Directory.CreateDirectory ("players");
 			}
 			PlayerDB.Load (this);
-                SendMessage("Welcome back " + color + prefix + name + Server.DefaultColor + "! You've been here " + totalLogins + " times!"); {
+                SendMessage("Welcome back " + color + prefix + name + Server.DefaultColor + "! You've been here " + totalLogins + " times!");
+            string joinm1 = "&a+ " + this.color + this.prefix + this.DisplayName + Server.DefaultColor + " " + File.ReadAllText("text/login/" + this.name + ".txt");
+
+            GlobalMessage(joinm1);
+            {
                 if (Server.muted.Contains(name))
                 {
                     muted = true;
@@ -1632,7 +1637,7 @@ namespace MCForge
                             buffer = null;
                         }
                         else
-                            Player.SendMessage(p1, joinm);
+                            Player.SendMessage(p1, "");
                     });
                 }
             }
@@ -3636,13 +3641,11 @@ return;
                     if (cmd.ToLower() == "setpass")
                     {
                         Command.all.Find(cmd).Use(this, message);
-                        Server.s.CommandUsed(this.name + " used /setpass");
                         return;
                     }
                     if (cmd.ToLower() == "pass")
                     {
                         Command.all.Find(cmd).Use(this, message);
-                        Server.s.CommandUsed(this.name + " used /pass");
                         return;
                     }
                 }
@@ -3891,7 +3894,7 @@ return;
                         }
                     }
                 }
-                Server.s.Log(name + " @" + p.name + ": " + message);
+                Server.s.Log(name + " @" + p.DisplayName + ": " + message);
                 SendChat(this, Server.DefaultColor + "[<] " + p.color + p.prefix + p.name + ": &f" + message);
                 return;
             }
@@ -3899,7 +3902,7 @@ return;
             {
                 if (ignored2 == this.name)
                 {
-                    Server.s.Log(name + " @" + p.name + ": " + message);
+                    Server.s.Log(name + " @" + p.DisplayName + ": " + message);
                     SendChat(this, Server.DefaultColor + "[<] " + p.color + p.prefix + p.name + ": &f" + message);
                     return;
                 }
@@ -3908,7 +3911,7 @@ return;
             {
                 Server.s.Log(name + " @" + p.name + ": " + message);
                 SendChat(this, Server.DefaultColor + "[<] " + p.color + p.prefix + p.name + ": &f" + message);
-                SendChat(p, "&9[>] " + this.color + this.prefix + this.name + ": &f" + message);
+                SendChat(p, "&9[>] " + this.color + this.prefix + p.name + ": &f" + message);
             }
             else { SendMessage("Player \"" + to + "\" doesn't exist!"); }
         }
@@ -4424,9 +4427,9 @@ rot = new byte[2] { rotx, roty };*/
             HTNO(id).CopyTo(buffer, 0);
             StringFormat(name, 64).CopyTo(buffer, 2);
             if (displayname == "") { displayname = name; }
-           // StringFormat(displayname, 64).CopyTo(buffer, 66);
-           //StringFormat(grp.color + grp.name.ToUpper() + "s:", 64).CopyTo(buffer, 130);
-            //buffer[194] = (byte)grp.Permission.GetHashCode();
+            StringFormat(displayname, 64).CopyTo(buffer, 66);
+           StringFormat("", 64).CopyTo(buffer, 130);
+            buffer[194] = (byte)grp.Permission.GetHashCode();
             SendRaw(OpCode.ExtAddPlayerName, buffer);
         }
 
@@ -4855,7 +4858,7 @@ changed |= 4;*/
 
             if (showname)
             {
-                message = "<Level>" + from.color + from.voicestring + from.color + from.prefix + from.name + ": &f" + message;
+                message = "<Local>" + from.color + from.voicestring + from.color + from.prefix + from.name + ": &f" + message;
             }
             players.ForEach(delegate(Player p)
             {
@@ -5171,7 +5174,7 @@ changed |= 4;*/
         {
             if (showname)
             {
-                message = "<World>" + from.color + from.voicestring + from.color + from.prefix + from.name + ": &f" + message;
+                message = "<local>" + from.color + from.voicestring + from.color + from.prefix + from.name + ": &f" + message;
             }
             players.ForEach(delegate(Player p)
             {
@@ -5479,7 +5482,7 @@ changed |= 4;*/
 
                 if (Server.afkset.Contains(name)) Server.afkset.Remove(name);
 
-                if (kickString == "") kickString = "Disconnected.";
+                if (kickString == "") kickString = " disconnected.";
 
                 SendKick(kickString);
 
@@ -5507,7 +5510,7 @@ changed |= 4;*/
                     }
 
                     GlobalDie(this, false);
-                    if (kickString == "Disconnected." || kickString.IndexOf("Server shutdown") != -1 || kickString == Server.customShutdownMessage)
+                    if (kickString == "disconnected." || kickString.IndexOf("Server shutdown") != -1 || kickString == Server.customShutdownMessage)
                     {
                         if (!Directory.Exists("text/logout"))
                         {
@@ -5515,11 +5518,11 @@ changed |= 4;*/
                         }
                         if (!File.Exists("text/logout/" + name + ".txt"))
                         {
-                            File.WriteAllText("text/logout/" + name + ".txt", "Disconnected.");
+                            File.WriteAllText("text/logout/" + name + ".txt", "disconnected.");
                         }
                         if (!hidden)
                         {
-                            string leavem = "&c- " + color + prefix + name + Server.DefaultColor + " " + File.ReadAllText("text/logout/" + name + ".txt");
+                            string leavem = "&c- " + color + prefix + DisplayName + Server.DefaultColor + " " + File.ReadAllText("text/logout/" + name + ".txt");
                             if ((Server.guestLeaveNotify && this.group.Permission <= LevelPermission.Guest) || this.group.Permission > LevelPermission.Guest)
                             {
                                 Player.players.ForEach(delegate(Player p1)
@@ -5532,17 +5535,21 @@ changed |= 4;*/
                                         buffer = null;
                                     }
                                     else
-                                        Player.SendMessage(p1, leavem);
+                                        GlobalMessage(leavem);
                                 });
                             }
                         }
                         //IRCBot.Say(name + " left the game.");
                         Server.s.Log(name + " disconnected.");
+                        string leavem1 = "&c- " + color + prefix + DisplayName + Server.DefaultColor + " " + File.ReadAllText("text/logout/" + name + ".txt");
+                        GlobalMessage(leavem1);
                     }
                     else
                     {
                         totalKicked++;
-                        GlobalChat(this, "&c- " + color + prefix + name + Server.DefaultColor + " kicked (" + kickString + Server.DefaultColor + ").", false);
+                        string leavem2 = "&c- " + color + prefix + name + Server.DefaultColor + " " + File.ReadAllText("text/logout/" + name + ".txt");
+                        GlobalMessage(leavem2);
+                        //GlobalChat(this, "&c- " + color + prefix + name + Server.DefaultColor + " kicked (" + kickString + Server.DefaultColor + ").", false);
                         //IRCBot.Say(name + " kicked (" + kickString + ").");
                         Server.s.Log(name + " kicked (" + kickString + ").");
                     }
@@ -6040,7 +6047,7 @@ Next: continue;
             if (ip.StartsWith("172.") && (int.Parse(ip.Split('.')[1]) >= 16 && int.Parse(ip.Split('.')[1]) <= 31))
                 return true;
             return IPAddress.IsLoopback(IPAddress.Parse(ip)) || ip.StartsWith("192.168.") || ip.StartsWith("10.");
-            //return IsLocalIpAddress(ip);
+           // return IsLocalIpAddress(ip);
         }
 
         public string ResolveExternalIP(string ip)
