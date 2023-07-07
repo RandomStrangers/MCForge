@@ -42,7 +42,7 @@ namespace MCForge
                         break;
                     case "ExtPlayerList":
                         ExtPlayerList = version;
-#if LIST_BROKE
+
                         spawned = true;
                         if (version > 0)
                             Player.players.ForEach(delegate(Player p)
@@ -88,7 +88,6 @@ namespace MCForge
                             Server.ErrorLog(e);
                             Server.s.Log("Error spawning player \"" + name + "\"");
                         }
-#endif
                         break;
                     case "EnvColors":
                         EnvColors = version;

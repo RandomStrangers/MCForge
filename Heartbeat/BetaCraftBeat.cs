@@ -44,7 +44,7 @@ namespace MCForge
                 "&public=" + Server.pub +
                 "&version=7" +
                 "&salt=" + Server.salt2 +
-                "&users=" + Player.number +
+                "&users=" + Player.players +
                 "&software=" + Server.SoftwareNameVersioned2;
         }
 
