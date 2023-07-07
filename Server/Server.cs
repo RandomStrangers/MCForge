@@ -299,8 +299,8 @@ namespace MCForge
         public static byte maxGuests = 10;
 
         public static byte maps = 5;
-        public static int port = 25657;
-        public static int port2 = 25657;
+        public static int port = 25632;
+        public static int port2 = 25632;
 
         public static bool pub = true;
         public static bool verify = true;
