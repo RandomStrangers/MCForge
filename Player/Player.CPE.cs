@@ -1,5 +1,5 @@
 ﻿
- using System;
+using System;
 namespace MCForge
 {
     public partial class Player
@@ -42,10 +42,9 @@ namespace MCForge
                         break;
                     case "ExtPlayerList":
                         ExtPlayerList = version;
-
                         spawned = true;
                         if (version > 0)
-                            Player.players.ForEach(delegate(Player p)
+                            Player.players.ForEach(delegate (Player p)
                             {
                                 if (p.HasExtension("ExtPlayerList", 2))
                                 {
@@ -56,7 +55,7 @@ namespace MCForge
                                     SendExtAddPlayerName(p.id, p.name, p.group, p.color + p.name);
                                 }
                             });
-                        
+
                         try
                         {
                             ushort x = (ushort)((0.5 + level.spawnx) * 32);
@@ -116,9 +115,6 @@ namespace MCForge
                     case "MessageTypes":
                         MessageTypes = version;
                         break;
-                    case "TwoWayPing":
-                        TwoWayPing = version;
-                        break;
                 }
             }
         }
@@ -132,7 +128,7 @@ namespace MCForge
                 case "CustomBlocks": return CustomBlocks == version;
                 case "HeldBlock": return HeldBlock == version;
                 case "TextHotKey": return TextHotKey == version;
-               // case "ExtPlayerList": return ExtPlayerList == version;
+                case "ExtPlayerList": return ExtPlayerList == version;
                 case "EnvColors": return EnvColors == version;
                 case "SelectionCuboid": return SelectionCuboid == version;
                 case "BlockPermissions": return BlockPermissions == version;
@@ -142,7 +138,6 @@ namespace MCForge
                 case "HackControl": return HackControl == version;
                 case "EmoteFix": return EmoteFix == version;
                 case "MessageTypes": return MessageTypes == version;
-                case "TwoWayPing": return TwoWayPing == version;
                 default: return false;
             }
         }

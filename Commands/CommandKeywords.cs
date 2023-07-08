@@ -289,9 +289,7 @@ namespace MCForge.Commands
             // New/edited commands
             new CommandKeywords((new CmdCCHeartbeat()), "heart classicube server list");
             new CommandKeywords((new CmdUpdate()), "server software mcforge");
-            new CommandKeywords((new CmdCCHeartbeat2()), "heart 2 classicube server list");
             new CommandKeywords((new CmdBCHeartbeat()), "heart betacraft server list");
-            new CommandKeywords((new CmdBCHeartbeat2()), "heart 2 betacraft server list");
             new CommandKeywords((new CmdWhoip()), "who ip info");
             new CommandKeywords((new CmdClones2()), "alts  info");
             new CommandKeywords((new CmdClear()), "clear del player chat");
@@ -299,11 +297,13 @@ namespace MCForge.Commands
             new CommandKeywords((new CmdOldDevs()), "old dev original mcforge forgeware forgecraft");
             new CommandKeywords((new CmdServerInfo()), "server stats info");
             new CommandKeywords((new CmdClients()), "clients player app");
-            // I'll leave it here just in case I decide to update the changelog, though highly not likely.
-            // new CommandKeywords((new CmdChangeLog()), "mcforge change log");
-            // These ones don't work or are out of date
             new CommandKeywords((new CmdResetBot()), "reset bot");
             new CommandKeywords((new CmdHasirc()), "has " + Server.ircChannel);
+            // I'll leave it here just in case I decide to update the changelog, though highly not likely.
+            // new CommandKeywords((new CmdChangeLog()), "mcforge change log");
+            // These ones don't work or are out of date           
+            // new CommandKeywords((new CmdCCHeartbeat2()), "heart 2 classicube server list");
+            //  new CommandKeywords((new CmdBCHeartbeat2()), "heart 2 betacraft server list");
             //new CommandKeywords((new CmdServerReport()), "report server");
             // new CommandKeywords((new CmdHost()), "Owner server " + Server.Owner + " " + Server.ZallState);
             // new CommandKeywords((new CmdPumpkin()), "halloween");

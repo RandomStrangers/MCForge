@@ -116,8 +116,8 @@
   <ItemGroup>
     <Compile Include="CmdStore.cs" />
     <Compile Include="Commands\Added\Alias.cs" />
-    <Compile Include="Commands\Added\CmdBCHeartbeat2.cs" />
-    <Compile Include="Commands\Added\CmdCCHeartbeat2.cs" />
+    <Compile Include="Commands\Added\Unused\CmdBCHeartbeat2.cs" />
+    <Compile Include="Commands\Added\Unused\CmdCCHeartbeat2.cs" />
     <Compile Include="Commands\Added\CmdDevs.cs" />
     <Compile Include="Commands\Added\CmdClients.cs" />
     <Compile Include="Commands\Added\CmdServerInfo.cs" />
@@ -157,8 +157,6 @@
     <Compile Include="GUI\WoM.Designer.cs">
       <DependentUpon>WoM.cs</DependentUpon>
     </Compile>
-    <Compile Include="Heartbeat\BetaCraftBeat2.cs" />
-    <Compile Include="Heartbeat\ClassiCubeBeat2.cs" />
     <Compile Include="IRC\ForgeBot-staff.cs" />
     <Compile Include="Player\Added\Player.CPE.cs" />
     <Compile Include="Player\Opcode.cs" />
@@ -409,7 +407,7 @@
     </Compile>
     <Compile Include="Commands\CmdGoto.cs" />
     <Compile Include="Commands\CmdHacks.cs" />
-    <Compile Include="Commands\Added\Unused\CmdHasirc.cs" />
+    <Compile Include="Commands\Added\CmdHasirc.cs" />
     <Compile Include="Commands\CmdHelp.cs" />
     <Compile Include="Commands\CmdHide.cs" />
     <Compile Include="Commands\CmdImageprint.cs" />

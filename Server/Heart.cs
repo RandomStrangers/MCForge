@@ -48,9 +48,9 @@ namespace MCForge {
 
             //Keep in this order.
             new ClassiCubeBeat(),
-            new ClassiCubeBeat2(),
+            //new ClassiCubeBeat2(),
             new BetaCraftBeat(),
-            new BetaCraftBeat2(),
+          //  new BetaCraftBeat2(),
 
         };
 

@@ -15,36 +15,38 @@
 	or implied. See the Licenses for the specific language governing
 	permissions and limitations under the Licenses.
 */
+/*
 using System;
 namespace MCForge.Commands
 {
-    public class CmdBCHeartbeat2 : Command
+    public class CmdCCHeartbeat2 : Command
     {
-        public override string name { get { return "bcheartbeat2"; } }
-        public override string shortcut { get { return  "bcbeat2"; } }
+        public override string name { get { return "ccheartbeat2"; } }
+        public override string shortcut { get { return  "ccbeat2"; } }
         public override string type { get { return "other"; } }
         public override bool museumUsable { get { return true; } }
         public override LevelPermission defaultRank { get { return LevelPermission.Nobody; } }
-        public CmdBCHeartbeat2() { }
+        public CmdCCHeartbeat2() { }
 
         public override void Use(Player p, string message)
         {
             try
             {
-                Heart.Pump(new BetaCraftBeat2());
+                Heart.Pump(new ClassiCubeBeat2());
             }
             catch (Exception e)
             {
-                Server.s.Log("Error with BetaCraft2 pump.");
+                Server.s.Log("Error with ClassiCube2 pump.");
                 Server.ErrorLog(e);
             }
             Player.SendMessage(p, "Heartbeat pump sent.");
-            Player.SendMessage(p, "BetaCraft URL found: " + Server.BCURL2);
+            Player.SendMessage(p, "ClassiCube2 URL found: " + Server.CCURL2);
         }
 
         public override void Help(Player p)
         {
-            Player.SendMessage(p, "/bcheartbeat2 - Forces a pump for the BetaCraft2 heartbeat.  DEBUG PURPOSES ONLY.");
+            Player.SendMessage(p, "/ccheartbeat2 - Forces a pump for the ClassiCube2 heartbeat.  DEBUG PURPOSES ONLY.");
         }
     }
 }
+*/

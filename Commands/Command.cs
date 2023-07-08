@@ -309,9 +309,7 @@ namespace MCForge
 			all.Add(new CmdZz());
 			// New/edited commands
             all.Add(new CmdCCHeartbeat());
-            all.Add(new CmdCCHeartbeat2());
             all.Add(new CmdBCHeartbeat());
-            all.Add(new CmdBCHeartbeat2());
             all.Add(new CmdUpdate());
             all.Add(new CmdClones2());
             all.Add(new CmdWhoip());
@@ -321,11 +319,15 @@ namespace MCForge
             all.Add(new CmdServerInfo());
             all.Add(new CmdWomid());
 			all.Add(new CmdClients());
+            all.Add(new CmdResetBot());
+            all.Add(new CmdHasirc());
             // I'll leave it here just in case I decide to update the changelog, though highly not likely.
             //all.Add(new CmdChangeLog());
             // These ones don't work or are out of date
-            all.Add(new CmdResetBot());
-             all.Add(new CmdHasirc());
+
+            //all.Add(new CmdBCHeartbeat2());
+            //all.Add(new CmdCCHeartbeat2());
+
             // all.Add(new CmdHost());
             // all.Add(new CmdServerReport());
             // all.Add(new CmdNyan());

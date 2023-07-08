@@ -24,49 +24,49 @@ namespace MCForge
     {
         /// <summary> Name of the CPE extension (e.g. ExtPlayerList) </summary>
         public string Name;
-    /// <summary> Highest version of this CPE extension supported by the server </summary>
-    public byte ServerVersion;
-    /// <summary> Highest version of this CPE extension supported by the client </summary>
-    public byte ClientVersion;
+        /// <summary> Highest version of this CPE extension supported by the server </summary>
+        public byte ServerVersion;
+        /// <summary> Highest version of this CPE extension supported by the client </summary>
+        public byte ClientVersion;
 
-    public const string ClickDistance = "ClickDistance";
-    public const string CustomBlocks = "CustomBlocks";
-    public const string HeldBlock = "HeldBlock";
-    public const string TextHotkey = "TextHotKey";
-    public const string ExtPlayerList = "ExtPlayerList";
-    public const string EnvColors = "EnvColors";
-    public const string SelectionCuboid = "SelectionCuboid";
-    public const string BlockPermissions = "BlockPermissions";
-    public const string ChangeModel = "ChangeModel";
-    public const string EnvMapAppearance = "EnvMapAppearance";
-    public const string EnvWeatherType = "EnvWeatherType";
-    public const string HackControl = "HackControl";
-    public const string EmoteFix = "EmoteFix";
-    public const string MessageTypes = "MessageTypes";
-    public const string LongerMessages = "LongerMessages";
-    public const string FullCP437 = "FullCP437";
-    public const string BlockDefinitions = "BlockDefinitions";
-    public const string BlockDefinitionsExt = "BlockDefinitionsExt";
-    public const string TextColors = "TextColors";
-    public const string BulkBlockUpdate = "BulkBlockUpdate";
-    public const string EnvMapAspect = "EnvMapAspect";
-    public const string PlayerClick = "PlayerClick";
-    public const string EntityProperty = "EntityProperty";
-    public const string ExtEntityPositions = "ExtEntityPositions";
-    public const string TwoWayPing = "TwoWayPing";
-    public const string InventoryOrder = "InventoryOrder";
-    public const string InstantMOTD = "InstantMOTD";
-    public const string FastMap = "FastMap";
-    public const string ExtBlocks = "ExtendedBlocks";
-    public const string ExtTextures = "ExtendedTextures";
-    public const string SetHotbar = "SetHotbar";
-    public const string SetSpawnpoint = "SetSpawnpoint";
-    public const string VelocityControl = "VelocityControl";
-    public const string CustomParticles = "CustomParticles";
-    public const string CustomModels = "CustomModels";
-    public const string PluginMessages = "PluginMessages";
-}
-public partial class Player
+        public const string ClickDistance = "ClickDistance";
+        public const string CustomBlocks = "CustomBlocks";
+        public const string HeldBlock = "HeldBlock";
+        public const string TextHotkey = "TextHotKey";
+        public const string ExtPlayerList = "ExtPlayerList";
+        public const string EnvColors = "EnvColors";
+        public const string SelectionCuboid = "SelectionCuboid";
+        public const string BlockPermissions = "BlockPermissions";
+        public const string ChangeModel = "ChangeModel";
+        public const string EnvMapAppearance = "EnvMapAppearance";
+        public const string EnvWeatherType = "EnvWeatherType";
+        public const string HackControl = "HackControl";
+        public const string EmoteFix = "EmoteFix";
+        public const string MessageTypes = "MessageTypes";
+        public const string LongerMessages = "LongerMessages";
+        public const string FullCP437 = "FullCP437";
+        public const string BlockDefinitions = "BlockDefinitions";
+        public const string BlockDefinitionsExt = "BlockDefinitionsExt";
+        public const string TextColors = "TextColors";
+        public const string BulkBlockUpdate = "BulkBlockUpdate";
+        public const string EnvMapAspect = "EnvMapAspect";
+        public const string PlayerClick = "PlayerClick";
+        public const string EntityProperty = "EntityProperty";
+        public const string ExtEntityPositions = "ExtEntityPositions";
+        public const string TwoWayPing = "TwoWayPing";
+        public const string InventoryOrder = "InventoryOrder";
+        public const string InstantMOTD = "InstantMOTD";
+        public const string FastMap = "FastMap";
+        public const string ExtBlocks = "ExtendedBlocks";
+        public const string ExtTextures = "ExtendedTextures";
+        public const string SetHotbar = "SetHotbar";
+        public const string SetSpawnpoint = "SetSpawnpoint";
+        public const string VelocityControl = "VelocityControl";
+        public const string CustomParticles = "CustomParticles";
+        public const string CustomModels = "CustomModels";
+        public const string PluginMessages = "PluginMessages";
+    }
+    public partial class Player
     {
         public bool hasCpe;
 
