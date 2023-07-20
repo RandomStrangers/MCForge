@@ -266,7 +266,7 @@ namespace MCForge
         /// SoftwareName2 and SoftwareNameVersioned2 are for Betacraft heartbeats 
         /// since BetaCraft doesn't allow MCForge to connect using its default SoftwareName.
         /// </summary>
-        public const string InternalVersion = "5.5.1.0";
+        public const string InternalVersion = "5.5.1.1";
         public static string UpdateVersion { get { return InternalVersion + 0.1; } }
         public static string Version { get { return InternalVersion; } }
         public static string SoftwareName2 = "MCGalaxy";
@@ -291,7 +291,7 @@ namespace MCForge
         public static string salt3 = salt;
         public static string salt4 = salt;
 
-        public static string name = "[MCForge] Default";
+        public static string name;
         public static string motd = "Welcome!";
 		public static string textureUrl = "";
         public static byte players = 12;
