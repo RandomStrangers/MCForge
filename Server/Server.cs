@@ -291,7 +291,7 @@ namespace MCForge
         public static string salt3 = salt;
         public static string salt4 = salt;
 
-        public static string name;
+        public static string name = "[MCForge] Default";
         public static string motd = "Welcome!";
 		public static string textureUrl = "";
         public static byte players = 12;
@@ -407,7 +407,7 @@ namespace MCForge
         public static bool logbeat = true;
         public static bool adminsjoinsilent = false;
         public static bool mono { get { return (Type.GetType("Mono.Runtime") != null); } }
-        public static string Owner;
+        public static string Owner = "sethbatman05";
         public static bool WomDirect = false;
         public static bool UseSeasons = false;
         public static bool guestLimitNotify = true;
