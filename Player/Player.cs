@@ -1341,7 +1341,6 @@ namespace MCForge
                     SendExtEntry("EmoteFix", 1);
                     SendExtEntry("MessageTypes", 1);
                     SendExtEntry("LongerMessages", 1);
-                    SendExtEntry("TwoWayPing", 1);
                     SendCustomBlockSupportLevel(1);
                 }
 

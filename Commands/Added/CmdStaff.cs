@@ -39,7 +39,7 @@ namespace MCForge.Commands
                 devlist += temp + ", ";
             }
             devlist = devlist.Remove(devlist.Length - 2);
-            Player.SendMessage(p, "New &9MCForge" + Server.DefaultColor + "Development Team (Continuing the legacy!): " + Server.DefaultColor + devlist + Server.DefaultColor + ".");
+            Player.SendMessage(p, "New &9MCForge" + Server.DefaultColor + " Development Team (Continuing the legacy!): " + Server.DefaultColor + devlist + Server.DefaultColor + ".");
             Player.SendMessage(p, "&5Special thanks to the original &9MCForge &5developers!");
             Command.all.Find("olddevs").Use(p, "");
             Command.all.Find("mods").Use(p, "");
