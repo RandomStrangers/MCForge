@@ -9,12 +9,12 @@ About MCForge Redux
 
 MCForge Redux is a classic Minecraft server software based on MCLawl.  It has been released under an open-source [license][1] to allow the community to help us develop it further.  We welcome all pull requests and will merge them in at our own discretion.
 
-The official website for MCForge is [mcforge.org][2]
+The official website for MCForge was [mcforge.org], but is now down.
 
 Contributors
 ------------
 
-* If you are pushing your commits OR if you are doing a pull request, PLEASE make sure to NORMALIZE your entire local repo if it isn't already normalized. The head repo is already normalized, so if you forked or pulled from the HEAD, everything should be alright. See [this link][3] for more info on re-normalizing your repo.  
+* If you are pushing your commits OR if you are doing a pull request, PLEASE make sure to NORMALIZE your entire local repo if it isn't already normalized. The head repo is already normalized, so if you forked or pulled from the HEAD, everything should be alright. See [this link][2] for more info on re-normalizing your repo.  
 **!NOTE!** Commits that do not handle the line-endings correctly *WILL* be reverted.  
   
 * Do not commit large blocks of changes and files. Try to split and group these into smaller related pieces and commit these one by one. If you are adding a new file that might have 100+ lines of code additions, then that's allowed, just don't add anything else unrelated to that commit!
@@ -41,5 +41,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 
 [1]: https://raw.github.com/MCForge/MCForge-Vanilla-Redux/master/LICENSE.txt
-[2]: http://www.mcforge.org
-[3]: https://help.github.com/articles/dealing-with-line-endings
+[2]: https://help.github.com/articles/dealing-with-line-endings
+[mcforge.org]:
+http://mcforge.org
