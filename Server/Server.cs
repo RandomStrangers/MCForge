@@ -37,14 +37,23 @@ namespace MCForge
     public enum LogType { Process, Main, Op, Admin }
     public class Server
     {
-       // public static GlobalChatBot GlobalChat;
+        public static string ToRawUsername(string name)
+        {
+            if (ClassicubeAccountPlus)
+                return name.RemoveLastPlus();
+            return name;
+        }
+        // public static GlobalChatBot GlobalChat;
+        public static bool ClassicubeAccountPlus = false;
         public bool IRCSSL = true;
+        public static string RestartPath;
         public static string SourceURL = "https://github.com/RandomStrangers/MCForge/";
         public static bool cancelcommand = false;
         public static bool canceladmin = false;
         public static bool cancellog = false;
         public static bool canceloplog = false;
         public static bool DownloadBeta = false;
+        public static bool SetupFinished, CLIMode;
         public static string apppath = Application.StartupPath;
         public delegate void OnConsoleCommand(string cmd, string message);
         public static event OnConsoleCommand ConsoleCommand;
@@ -266,7 +275,7 @@ namespace MCForge
         /// SoftwareName2 and SoftwareNameVersioned2 are for Betacraft heartbeats 
         /// since BetaCraft doesn't allow MCForge to connect using its default SoftwareName.
         /// </summary>
-        public const string InternalVersion = "5.5.1.1";
+        public const string InternalVersion = "5.5.1.2";
         public static string UpdateVersion { get { return InternalVersion + 0.1; } }
         public static string Version { get { return InternalVersion; } }
         public static string SoftwareName2 = "MCGalaxy";
@@ -312,6 +321,15 @@ namespace MCForge
         public static int spamcounter = 8;
         public static int mutespamtime = 60;
         public static int spamcountreset = 5;
+
+        //MySQL
+        public static bool UseMySQL = false;
+        public static string MySQLHost = "127.0.0.1";
+        public static string MySQLPort = "3306";
+        public static string MySQLUsername = "root";
+        public static string MySQLPassword = "password";
+        public static string MySQLDatabaseName = "MCZallDB";
+        public static bool DatabasePooling = true;
 
         public static string ZallState = "Alive";
 

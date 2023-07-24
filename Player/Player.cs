@@ -35,6 +35,23 @@ namespace MCForge
 {
     public partial class Player : IDisposable
     {
+        public PlayerIgnores Ignores = new PlayerIgnores();
+
+        public string FormatNick(string name)
+        {
+            Player target = PlayerInfo.FindExact(name);
+            // TODO: select color from database?
+            if (target != null) return FormatNick(target);
+
+            return Group.GroupIn(name).Color + Server.ToRawUsername(name);
+        }
+
+        /// <summary> Formats a player's name for displaying in chat. </summary>        
+        public string FormatNick(Player target)
+        {
+            if (Ignores.Nicks) return target.color + target.truename;
+            return target.color + target.DisplayName;
+        }
         private static readonly char[] UnicodeReplacements = " ☺☻♥♦♣♠•◘○\n♂♀♪♫☼►◄↕‼¶§▬↨↑↓→←∟↔▲▼".ToCharArray();
 
         /// <summary> List of chat keywords, and emotes that they stand for. </summary>
@@ -237,7 +254,7 @@ namespace MCForge
 
         public static bool storeHelp = false;
         public static string storedHelp = "";
-        private string truename;
+        public string truename;
         internal bool dontmindme = false;
         public Socket socket;
         System.Timers.Timer timespent = new System.Timers.Timer(1000);
@@ -1339,8 +1356,19 @@ namespace MCForge
                     SendExtEntry("EnvWeatherType", 1);
                     SendExtEntry("HackControl", 1);
                     SendExtEntry("EmoteFix", 1);
+                    SendExtEntry("FullCP437", 1);
                     SendExtEntry("MessageTypes", 1);
                     SendExtEntry("LongerMessages", 1);
+                    SendExtEntry("TextHotkey", 1);
+                    // All CPE features supported in ClasssiCube:
+                    //"ClickDistance", "CustomBlocks", "HeldBlock", "EmoteFix", "TextHotKey", "ExtPlayerList",
+                    //"EnvColors", "SelectionCuboid", "BlockPermissions", "ChangeModel", "EnvMapAppearance",
+                    //"EnvWeatherType", "MessageTypes", "HackControl", "PlayerClick", "FullCP437", "LongerMessages",
+                    //"BlockDefinitions", "BlockDefinitionsExt", "BulkBlockUpdate", "TextColors", "EnvMapAspect",
+                    //"EntityProperty", "ExtEntityPositions",  "TwoWayPing", "InventoryOrder", "InstantMOTD", "FastMap", "SetHotbar",
+                    //"SetSpawnpoint","VelocityControl", "CustomParticles",  "CustomModels", "PluginMessages", "ExtEntityTeleport",
+                    /* NOTE: These must be placed last for when EXTENDED_TEXTURES or EXTENDED_BLOCKS are not defined */
+                    //"ExtendedTextures", "ExtendedBlocks"
                     SendCustomBlockSupportLevel(1);
                 }
 
@@ -1461,7 +1489,7 @@ namespace MCForge
             }
             PlayerDB.Load(this);
             SendMessage("Welcome back " + color + prefix + name + Server.DefaultColor + "! You've been here " + totalLogins + " times!");
-            GlobalMessage(name + "connected");
+            // GlobalMessage(name + "connected");
             {
                 if (Server.muted.Contains(name))
                 {
@@ -1568,7 +1596,7 @@ namespace MCForge
             }
             if (!File.Exists("text/login/" + this.name + ".txt"))
             {
-                File.WriteAllText("text/login/" + this.name + ".txt", "joined the server.");
+                File.WriteAllText("text/login/" + this.name + ".txt", "connected.");
             }
             loggedIn = true;
             lastlogin = DateTime.Now;
@@ -1625,7 +1653,7 @@ namespace MCForge
                 if (this.group.Permission == LevelPermission.Guest)
                 {
                     if (!agreedFile.Contains(this.name.ToLower()))
-                        SendMessage("&9You must read the &c/rules&9 and &c/agree&9 to them before you can build and use commands!");
+                        SendMessage("&9You must read the &4/rules&9 and &4/agree&9 to them before you can build and use commands!");
                     else agreed = true;
                 }
                 else { agreed = true; }
@@ -1645,6 +1673,7 @@ namespace MCForge
                             Player.StringFormat("^detail.user.join=" + color + name + c.white, 64).CopyTo(buffer, 1);
                             p1.SendRaw(OpCode.Message, buffer);
                             buffer = null;
+                            Player.SendMessage(p1, joinm);
                         }
                         else
                             Player.SendMessage(p1, joinm);
@@ -4179,10 +4208,14 @@ return;
                     if (newLine.TrimEnd(' ')[newLine.TrimEnd(' ').Length - 1] < '!')
                     {
                         //For some reason, this did the opposite
-                        if (HasExtension("EmoteFix"))
+                        if (!HasExtension("EmoteFix"))
                         {
                             newLine += '\'';
                         }
+                        else
+                        {
+                        }
+
                     }
 
                     if (HasBadColorCodes(newLine))
@@ -5576,6 +5609,7 @@ changed |= 4;*/
                                         Player.StringFormat("^detail.user.part=" + color + name + c.white, 64).CopyTo(buffer, 1);
                                         p1.SendRaw(OpCode.Message, buffer);
                                         buffer = null;
+                                        Player.SendMessage(p1, leavem);
                                     }
                                     else
                                         Player.SendMessage(p1, leavem);

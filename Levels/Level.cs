@@ -125,6 +125,7 @@ namespace MCForge
         public bool loadOnGoto = true;
         public string motd = "ignore";
         public string name;
+        public static string name2;
         public int overload = 1500;
 		public byte weather;
         public ushort[] redSpawn = { 0, 0, 0 };

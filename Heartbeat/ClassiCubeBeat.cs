@@ -40,7 +40,7 @@ namespace MCForge
         {
             return "&port=" + Server.port +
                 "&max=" + Server.players +
-                "&name=[MCForge] Default" /*+ Heart.EncodeUrl(Server.name)*/ +
+                "&name=" + Heart.EncodeUrl(Server.name) +
                 "&public=" + Server.pub +
                 "&version=7" +
                 "&salt=" + Server.salt +

@@ -40,8 +40,7 @@ namespace MCForge.Commands
 
                 foreach (Group grp in Group.GroupList)
                 {
-                    if (grp.name != "nobody")
-                    {
+               
                         if (String.IsNullOrEmpty(message) || !Group.Exists(message))
                         {
                             groups groups;
@@ -61,7 +60,7 @@ namespace MCForge.Commands
                             }
                         }
                     }
-                }
+                
 
                 string devs = "";
                 string olddevs = "";
@@ -130,11 +129,11 @@ namespace MCForge.Commands
                 if (staff) Player.SendMessage(p, "&cMCForge Staff Online:");
                 if (devs.Length > 0)
                 {
-                    Player.SendMessage(p, "#New &9MCForge" + Server.DefaultColor + "Devs:" + Server.DefaultColor + devs.Trim(','));
+                    Player.SendMessage(p, "#New &9MCForge" + Server.DefaultColor + " Devs:" + Server.DefaultColor + devs.Trim(','));
                 }
                 if (olddevs.Length > 0)
                 {
-                    Player.SendMessage(p, "#Old &9MCForge" + Server.DefaultColor + "Devs:" + Server.DefaultColor + devs.Trim(','));
+                    Player.SendMessage(p, "#Old &9MCForge" + Server.DefaultColor + " Devs:" + Server.DefaultColor + devs.Trim(','));
                 }
                 if (mods.Length > 0) {
                     Player.SendMessage(p, "#&2MCForge Mods:" + Server.DefaultColor + mods.Trim(','));

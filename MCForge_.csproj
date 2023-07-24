@@ -116,12 +116,14 @@
   <ItemGroup>
     <Compile Include="CmdStore.cs" />
     <Compile Include="Commands\Added\Alias.cs" />
+    <Compile Include="Commands\Added\CmdMain2.cs" />
     <Compile Include="Commands\Added\Unused\CmdBCHeartbeat2.cs" />
     <Compile Include="Commands\Added\Unused\CmdCCHeartbeat2.cs" />
     <Compile Include="Commands\Added\CmdDevs.cs" />
     <Compile Include="Commands\Added\CmdClients.cs" />
     <Compile Include="Commands\Added\CmdServerInfo.cs" />
     <Compile Include="Commands\Added\CmdWomid.cs" />
+    <Compile Include="Commands\Added\Unused\CmdPClients.cs" />
     <Compile Include="Commands\CmdConvertAll.cs" />
     <Compile Include="Commands\Added\CmdBCHeartbeat.cs" />
     <Compile Include="Commands\CmdInfectMessage.cs" />
@@ -159,6 +161,8 @@
     </Compile>
     <Compile Include="IRC\ForgeBot-staff.cs" />
     <Compile Include="Player\Added\Player.CPE.cs" />
+    <Compile Include="Player\Added\Player2.cs" />
+    <Compile Include="Player\Added\PlayerInfo.cs" />
     <Compile Include="Player\Opcode.cs" />
     <Compile Include="Player\Player.CPE.cs" />
     <Compile Include="Server\Added\CPESupport.cs" />
@@ -435,7 +439,7 @@
     <Compile Include="Commands\CmdPortal.cs" />
     <Compile Include="Commands\CmdRedo.cs" />
     <Compile Include="Commands\CmdReplace.cs" />
-    <Compile Include="Commands\Added\Unused\CmdResetBot.cs" />
+    <Compile Include="Commands\Added\CmdResetBot.cs" />
     <Compile Include="Commands\CmdRestore.cs" />
     <Compile Include="Commands\CmdRetrieve.cs" />
     <Compile Include="Commands\CmdRules.cs" />
@@ -555,6 +559,19 @@
     <Compile Include="Player\VIP.cs" />
     <Compile Include="Player\Warp.cs" />
     <Compile Include="Games\ZombieGame.cs" />
+    <Compile Include="util\Added\ColumnDesc.cs" />
+    <Compile Include="util\Added\Database.cs" />
+    <Compile Include="util\Added\EmotesHandler.cs" />
+    <Compile Include="util\Added\VolatileArray.cs" />
+    <Compile Include="util\Added\Formatter2.cs" />
+    <Compile Include="util\Added\IDatabaseBackend.cs" />
+    <Compile Include="util\Added\Interfaces.cs" />
+    <Compile Include="util\Added\utils.cs" />
+    <Compile Include="util\Added\MySQL.cs" />
+    <Compile Include="util\Added\OperatingSystem.cs" />
+    <Compile Include="util\Added\SQLite.cs" />
+    <Compile Include="util\Added\SQLiteBackend.cs" />
+    <Compile Include="util\Added\StringExts.cs" />
     <EmbeddedResource Include="GUI\Bugs.resx">
       <DependentUpon>Bugs.cs</DependentUpon>
     </EmbeddedResource>
@@ -630,7 +647,8 @@
     <Compile Include="sharkbite.thresher\TextColor.cs" />
     <Compile Include="sharkbite.thresher\UserInfo.cs" />
     <Compile Include="sharkbite.thresher\WhoisInfo.cs" />
-    <Compile Include="util\Extensions2.cs" />
+    <Compile Include="util\Added\Colors.cs" />
+    <Compile Include="util\Added\Extensions2.cs" />
     <Compile Include="util\ExtrasCollection.cs" />
     <Compile Include="queue\Cache.cs" />
     <Compile Include="queue\Check.cs" />
@@ -641,6 +659,7 @@
     <Compile Include="util\Extensions.cs" />
     <Compile Include="util\Hasher.cs" />
     <Compile Include="util\ICryptoService.cs" />
+    <Compile Include="util\Added\Matcher.cs" />
     <Compile Include="util\MathHelper.cs" />
     <Compile Include="util\MCForgeScripter.cs" />
     <Compile Include="util\Paths.cs" />

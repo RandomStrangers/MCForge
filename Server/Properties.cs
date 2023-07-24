@@ -174,9 +174,9 @@ if (!skipsalt)
                                         }
                                         else
                                         {
-                                            Server.s.Log("server-name invalid! setting to default.");
-                                        }
-                                        break;
+                                        Server.name = value;
+                                    }
+                                    break;
                                     case "motd":
                                         if (ValidString(value, "=![]&:.,{}~-+()?_/\\' "))
                                         { // allow = in the motd

@@ -27,6 +27,17 @@ namespace MCForge {
     /// Where ranks and there data are stored
     /// </summary>
     public class Group {
+        public static Group DefaultRank;
+        public PlayerList Players;
+        public string Color = "&f";
+        public static Group GroupIn(string playerName)
+        {
+            foreach (Group grp in GroupList)
+            {
+                if (grp.Players.Contains(playerName)) return grp;
+            }
+            return DefaultRank;
+        }
         public delegate void RankSet(Player p, Group newrank);
         //[Obsolete("Please use OnPlayerRankSetEvent.Register()")]
         public static event RankSet OnPlayerRankSet;

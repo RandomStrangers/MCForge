@@ -287,6 +287,7 @@ namespace MCForge.Commands
             new CommandKeywords((new CmdZone()), "area");
             new CommandKeywords((new CmdZz()), "static cuboid");
             // New/edited commands
+            new CommandKeywords((new CmdMain2()), "set default map level lvl setmain seth");
             new CommandKeywords((new CmdCCHeartbeat()), "heart classicube server list");
             new CommandKeywords((new CmdUpdate()), "server software mcforge");
             new CommandKeywords((new CmdBCHeartbeat()), "heart betacraft server list");
@@ -296,7 +297,8 @@ namespace MCForge.Commands
             new CommandKeywords((new CmdDevs()), "dev mcforge forgeware forgecraft");
             new CommandKeywords((new CmdOldDevs()), "old dev original mcforge forgeware forgecraft");
             new CommandKeywords((new CmdServerInfo()), "server stats info");
-            new CommandKeywords((new CmdClients()), "clients player app");
+            //new CommandKeywords((new CmdClients()), "clients player app");
+            new CommandKeywords((new CmdPClients()), "clients player app pclients pclients2 clients2 PClients2 Clients2");
             new CommandKeywords((new CmdResetBot()), "reset bot");
             new CommandKeywords((new CmdHasirc()), "has " + Server.ircChannel);
             // I'll leave it here just in case I decide to update the changelog, though highly not likely.
@@ -308,7 +310,7 @@ namespace MCForge.Commands
             // new CommandKeywords((new CmdHost()), "Owner server " + Server.Owner + " " + Server.ZallState);
             // new CommandKeywords((new CmdPumpkin()), "halloween");
             // new CommandKeywords((new CmdGlobal()), "irc mcforge " + Server.ircChannel);
-            //       new CommandKeywords((new CmdOpStats()), "stats op info");
+            // new CommandKeywords((new CmdOpStats()), "stats op info");
             // new CommandKeywords((new CmdNyan()), "troll cat");
         }
         public void Addcustom(Command cmd, string keywords)
