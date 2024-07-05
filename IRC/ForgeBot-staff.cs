@@ -45,7 +45,7 @@ namespace MCForge {
 			banCmd = new List<string>();
 			if (Server.opirc) {
                 server = "irc.esper.net";
-                opchannel = "#MCForge-op-irc";
+                opchannel = "#changethistoo";
                 nick = "MCForgeStaff";
                 connection = new Connection(new ConnectionArgs(nick, server), false, false);
 

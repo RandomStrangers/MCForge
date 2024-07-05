@@ -137,7 +137,7 @@ namespace MCForge.Gui
 
         private void cmdUpdate_Click(object sender, EventArgs e)
         {
-            MCForge_.Gui.Program.PerformUpdate();
+            MCForgeUpdater.Program.Main(null);
       /*      if (!Program.CurrentUpdate)
                 Program.UpdateCheck();
             else

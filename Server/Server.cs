@@ -82,7 +82,6 @@ namespace MCForge
         public event PlayerListHandler OnPlayerListChange;
         public event VoidHandler OnSettingsUpdate;
         public static ForgeBot IRC;
-        public static StaffIRCBot OPIRC;
         public static Thread locationChecker;
         public static bool UseTextures = false;
         public static Thread blockThread;
@@ -96,9 +95,6 @@ namespace MCForge
         public static string Hash3 = Hash;
         public static string Hash4 = Hash;
         public static string CCURL = string.Empty;
-        public static string BCURL = string.Empty;
-        public static string CCURL2 = string.Empty;
-        public static string BCURL2 = string.Empty;
 
         public static Socket listen;
         public static System.Diagnostics.Process process = System.Diagnostics.Process.GetCurrentProcess();
@@ -275,8 +271,7 @@ namespace MCForge
         /// SoftwareName2 and SoftwareNameVersioned2 are for Betacraft heartbeats 
         /// since BetaCraft doesn't allow MCForge to connect using its default SoftwareName.
         /// </summary>
-        public const string InternalVersion = "5.5.1.2";
-        public static string UpdateVersion { get { return InternalVersion + 0.1; } }
+        public const string InternalVersion = "5.5.1.3";
         public static string Version { get { return InternalVersion; } }
         public static string SoftwareName2 = "MCGalaxy";
         static string fullName2;
@@ -345,7 +340,7 @@ namespace MCForge
         public static bool ircColorsEnable = true;
         //        public static bool safemode = false; //Never used
         public static int ircPort = 6697;
-        public static string ircNick = "MCForge";
+        public static string ircNick = "MCForgeBot";
         public static string ircServer = "irc.esper.net";
         public static string ircChannel = "#MCForge-irc";
         public static bool ircIdentify = true;
@@ -354,7 +349,7 @@ namespace MCForge
         public static bool opircColorsEnable = true;
         //        public static bool safemode = false; //Never used
         public static int opircPort = 6697;
-        public static string opircNick = "MCForge";
+        public static string opircNick = "MCForgeBot";
         public static string opircServer = "irc.esper.net";
         public static string ircOpChannel = "#MCForge-op-irc";
         public static bool opircIdentify = true;
@@ -425,7 +420,7 @@ namespace MCForge
         public static bool logbeat = true;
         public static bool adminsjoinsilent = false;
         public static bool mono { get { return (Type.GetType("Mono.Runtime") != null); } }
-        public static string Owner = "sethbatman05";
+        public static string Owner;
         public static bool WomDirect = false;
         public static bool UseSeasons = false;
         public static bool guestLimitNotify = true;
@@ -939,11 +934,9 @@ namespace MCForge
                 else File.Create("text/messages.txt").Close();
                 // We always construct this to prevent errors...
                 IRC = new ForgeBot(Server.ircChannel, Server.ircOpChannel, Server.ircServer);
-                OPIRC = new StaffIRCBot(Server.ircOpChannel, Server.opircServer);
                 //GlobalChat = new GlobalChatBot(GlobalChatNick);
 
                 if (Server.irc) IRC.Connect();
-                if (Server.irc) OPIRC.Connect();
                 //if (Server.UseGlobalChat) GlobalChat.Connect();
                 // OmniBan stuff!
                 new Thread(new ThreadStart(() => omniban.Load(true))).Start();
@@ -1077,7 +1070,6 @@ namespace MCForge
         public static void LoadAllSettings()
         {
             SrvProperties.Load("properties/server.properties");
-            Updater.Load("properties/update.properties");
             Group.InitAll();
             Command.InitAll();
 			BlocksDB.Load ();
@@ -1169,7 +1161,6 @@ namespace MCForge
             try
             {
                 IRC.Disconnect(!AutoRestart ? "Server is shutting down." : "Server is restarting.");
-                OPIRC.Disconnect(!AutoRestart ? "Server is shutting down." : "Server is restarting.");
             }
             catch { }
         }
@@ -1413,7 +1404,7 @@ namespace MCForge
                 olddevs.Clear();
                 mods.Clear();
                 gcmods.Clear();
-                devs.Add("sethbatman05");
+                devs.Add("HarmonyNetwork");
                 olddevs.Add( "hetal" );
                 olddevs.Add( "erickilla" );
                 olddevs.Add( "rayne" );

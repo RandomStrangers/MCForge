@@ -1,0 +1,36 @@
+name: Build latest
+on: [push]
+
+concurrency:
+  group: ${{ github.ref }}-latest
+  cancel-in-progress: true
+
+jobs:
+  build-mono:
+    if: github.ref_name == github.event.repository.default_branch
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Compile MCForge using mono
+        shell: bash
+        id: compile
+        run: |
+          msbuild MCForge.sln /p:Configuration=Release
+          cp -R bin/Release bin/Release_normal
+          rm bin/Release/MCForge_.dll bin/Release/MCForge_.pdb
+          msbuild MCForge_.csproj /p:Configuration=Release
+
+      - uses: ./.github/actions/notify_failure
+        if: ${{ always() && steps.compile.outcome == 'failure' }}
+        with:
+          NOTIFY_MESSAGE: 'Failed to compile MCForge .NET build! <@999409543001931788>'
+          WEBHOOK_URL: '${{ secrets.WEBHOOK_URL }}'
+          
+      - uses: ./.github/actions/notify_success
+        if: ${{ always() && steps.compile.outcome == 'success' }}
+        with:
+          SOURCE_FILE: 'bin/Release_normal'
+          DEST_NAME: 'MCForge'
+          NOTIFY_MESSAGE: 'Successfully compiled MCForge .NET build.'
+          WEBHOOK_URL: '${{ secrets.WEBHOOK_URL }}'
+          

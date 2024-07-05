@@ -125,7 +125,7 @@
     <Compile Include="Commands\Added\CmdWomid.cs" />
     <Compile Include="Commands\Added\Unused\CmdPClients.cs" />
     <Compile Include="Commands\CmdConvertAll.cs" />
-    <Compile Include="Commands\Added\CmdBCHeartbeat.cs" />
+    <Compile Include="Commands\Added\Unused\CmdBCHeartbeat.cs" />
     <Compile Include="Commands\CmdInfectMessage.cs" />
     <Compile Include="Commands\CmdInventory.cs" />
     <Compile Include="Commands\CmdIronMan.cs" />
@@ -159,7 +159,6 @@
     <Compile Include="GUI\WoM.Designer.cs">
       <DependentUpon>WoM.cs</DependentUpon>
     </Compile>
-    <Compile Include="IRC\ForgeBot-staff.cs" />
     <Compile Include="Player\Added\Player.CPE.cs" />
     <Compile Include="Player\Added\Player2.cs" />
     <Compile Include="Player\Added\PlayerInfo.cs" />
@@ -200,10 +199,10 @@
     <Compile Include="GUI\Textures.Designer.cs">
       <DependentUpon>Textures.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Win32\Margins.cs" />
-    <Compile Include="GUI\Win32\Natives.cs" />
-    <Compile Include="GUI\Win32\RECT.cs" />
-    <Compile Include="GUI\Win32\Utils.cs" />
+    <Compile Include="GUI\Other\Margins.cs" />
+    <Compile Include="GUI\Other\Natives.cs" />
+    <Compile Include="GUI\Other\RECT.cs" />
+    <Compile Include="GUI\Other\Utils.cs" />
     <Compile Include="Server\HTTPGet.cs" />
     <Compile Include="Levels\Texture_Settings.cs" />
     <Compile Include="Player\MojangAccount.cs" />
@@ -380,7 +379,6 @@
     <Compile Include="Plugins\Manager\Plugin_Simple.cs" />
     <Compile Include="Server\Scripting\ScriptingVB.cs" />
     <Compile Include="Player\Checktimer.cs" />
-    <Compile Include="Server\Updater2.cs" />
     <Compile Include="Service References\TranslateService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -548,7 +546,6 @@
     <Compile Include="Server\Scripting\Scripting.cs" />
     <Compile Include="Server\Server.cs" />
     <Compile Include="Server\ServerSettings.cs" />
-    <Compile Include="Server\Updater.cs" />
     <Compile Include="Server\Added\Opcode.cs" />
     <Compile Include="Server\Added\HttpUtil.cs" />
     <Compile Include="Server\Added\Utils.cs" />
@@ -616,7 +613,6 @@
     <Compile Include="Commands\CmdLoadBytes.cs" />
     <Compile Include="Heartbeat\ClassiCubeBeat.cs" />
     <Compile Include="Heartbeat\IBeat.cs" />
-    <Compile Include="Heartbeat\BetaCraftBeat.cs" />
     <Compile Include="Levels\Block.cs" />
     <Compile Include="Games\EXPLevel.cs" />
     <Compile Include="Plugins\CtcpResponder.cs" />
@@ -741,9 +737,6 @@
     <None Include="Service References\TranslateService\SoapService.wsdl" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Changelog.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Compile Include="Commands\CmdWarn.cs" />
     <Content Include="LICENSE.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -761,7 +754,12 @@
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\TranslateService\" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="Updater\MCForgeUpdater.csproj">
+      <Project>{6ba05a4e-a43c-4a0b-80e8-720520d64ba6}</Project>
+      <Name>MCForgeUpdater</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

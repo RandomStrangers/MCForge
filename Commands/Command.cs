@@ -310,7 +310,6 @@ namespace MCForge
             // New/edited commands
             all.Add(new CmdMain2());
             all.Add(new CmdCCHeartbeat());
-            all.Add(new CmdBCHeartbeat());
             all.Add(new CmdUpdate());
             all.Add(new CmdClones2());
             all.Add(new CmdWhoip());

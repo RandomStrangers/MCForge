@@ -121,14 +121,12 @@ namespace MCForge_.Gui
                     {
                         ShowWindow(hConsole, 0);
                     }*/
-                    UpdateCheck(true);
                     if (foundView[5].Split(' ')[2].ToLower() == "true")
                     {
                         Application.EnableVisualStyles();
                         Application.SetCompatibleTextRenderingDefault(false);
                     }
 
-                    updateTimer.Elapsed += delegate { UpdateCheck(); }; updateTimer.Start();
                     Application.Run(new MCForge.Gui.Window());
                 }
                 if (args[0].Contains("cli"))
@@ -264,21 +262,18 @@ namespace MCForge_.Gui
                         msg = String.Format("To Ops -{0}Console [&a{1}{0}]&f- {2}", Server.DefaultColor, Server.ZallState, s);
                         Player.GlobalMessageOps(msg);
                         Server.IRC.Say(msg, true);
-                        Server.OPIRC.Say(msg, true);
                     }
                     else if (s[0] == '+')
                     {
                         msg = String.Format("To Admins -{0}Console [&a{1}{0}]&f- {2}", Server.DefaultColor, Server.ZallState, s);
                         Player.GlobalMessageAdmins(msg);
                         Server.IRC.Say(msg, true);
-                        Server.OPIRC.Say(msg, true);
                     }
                     else
                     {
                         msg = String.Format("{0}Console [&a{1}{0}]: &f{2}", Server.DefaultColor, Server.ZallState, s);
                         Player.GlobalMessage(msg);
                         Server.IRC.Say(msg);
-                        Server.OPIRC.Say(msg);
                     }
                     WriteToConsole(msg);
                 }
@@ -355,224 +350,7 @@ namespace MCForge_.Gui
 
         } */
 
-        public static bool CurrentUpdate = false;
-        static bool msgOpen = false;
         public static System.Timers.Timer updateTimer = new System.Timers.Timer(120 * 60 * 1000);
-
-        public static void UpdateCheck(bool wait = false, Player p = null)
-        {
-            CurrentUpdate = true;
-            Thread updateThread = new Thread(new ThreadStart(delegate
-            {
-                WebClient Client = new WebClient();
-
-                if (wait) { if (!Server.checkUpdates) return; Thread.Sleep(10000); }
-                try
-                {
-                    string raw = Client.DownloadString(Program.CurrentVersionFile);
-                    if (raw.EndsWith("b") && !Server.DownloadBeta)
-                    {
-                        Player.SendMessage(p, "Beta version found!");
-                        Player.SendMessage(p, "But server set to use release build!");
-                        return;
-                    }
-                    else if (raw.EndsWith("b") && Server.DownloadBeta)
-                        raw = raw.Substring(0, raw.Length - 1);
-                    string availableUpdateVersion = Server.Version;
-                    if (availableUpdateVersion != null)
-                    {
-                        if (Server.autoupdate == true || p != null)
-                        {
-                            if (Server.autonotify == true || p != null)
-                            {
-                                //if (p != null) Server.restartcountdown = "20";  This is set by the user.  Why change it?
-                                Player.GlobalMessage("Update found. Prepare for restart in &f" + Server.restartcountdown + Server.DefaultColor + " seconds.");
-                                Server.s.Log("Update found. Prepare for restart in " + Server.restartcountdown + " seconds.");
-                                //               double nxtTime = Convert.ToDouble(Server.restartcountdown);
-                                //                         DateTime nextupdate = DateTime.Now.AddMinutes(nxtTime);
-                                int timeLeft = Convert.ToInt32(Server.restartcountdown);
-                                System.Timers.Timer countDown = new System.Timers.Timer();
-                                countDown.Interval = 1000;
-                                countDown.Start();
-                                countDown.Elapsed += delegate
-                                {
-                                    if (Server.autoupdate == true || p != null)
-                                    {
-                                        Player.GlobalMessage("Updating in &f" + timeLeft + Server.DefaultColor + " seconds.");
-                                        Server.s.Log("Updating in " + timeLeft + " seconds.");
-                                        timeLeft = timeLeft - 1;
-                                        if (timeLeft < 0)
-                                        {
-                                            Player.GlobalMessage("---UPDATING SERVER---");
-                                            Server.s.Log("---UPDATING SERVER---");
-                                            countDown.Stop();
-                                            countDown.Dispose();
-                                            PerformUpdate();
-                                        }
-                                    }
-                                    else
-                                    {
-                                        Player.GlobalMessage("Stopping auto restart.");
-                                        Server.s.Log("Stopping auto restart.");
-                                        countDown.Stop();
-                                        countDown.Dispose();
-                                    }
-                                };
-                            }
-                            else
-                            {
-                                PerformUpdate();
-                            }
-
-                        }
-                        else
-                        {
-                            if (!msgOpen && !usingConsole)
-                            {
-                                if (Server.autonotify)
-                                {
-                                    msgOpen = true;
-                                    if (MessageBox.Show("New version found. Would you like to update?", "Update?", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                                    {
-                                        PerformUpdate();
-                                    }
-                                    msgOpen = false;
-                                }
-                            }
-                            else
-                            {
-                                ConsoleColor prevColor = Console.ForegroundColor;
-                                Console.ForegroundColor = ConsoleColor.Red;
-                                Console.WriteLine("An update was found!");
-                                Console.WriteLine("Update using the file at " + DLLLocation + " and placing it over the top of your current MCForge_.dll!");
-                                Console.WriteLine("Also update using the file at " + EXELocation + " and placing it over the top of your current MCForge.exe");
-                                Console.WriteLine("Also update using the file at " + CLIEXELocation + " and placing it over the top of your current MCForgeCLI.exe");
-                                Console.ForegroundColor = prevColor;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        Player.SendMessage(p, "No update found!");
-                    }
-                }
-                catch {  }
-                Client.Dispose();
-                CurrentUpdate = false;
-            })); updateThread.Start();
-        }
-
-        public static void PerformUpdate()
-        {
-            try
-            {
-                StreamWriter SW;
-                if (!Server.mono)
-                {
-                    if (!File.Exists("Update.bat"))
-                        SW = new StreamWriter(File.Create("Update.bat"));
-                    else
-                    {
-                        if (File.ReadAllLines("Update.bat")[0] != "::Version 3")
-                        {
-                           SW = new StreamWriter(File.Create("Update.bat"));
-                        }
-                        else
-                        {
-                            SW = new StreamWriter(File.Create("Update_generated.bat"));
-                        }
-                    }
-                    SW.WriteLine("::Version 3");
-                    SW.WriteLine("TASKKILL /pid %2 /F");
-                    SW.WriteLine("if exist MCForge_.dll.backup (erase MCForge_.dll.backup)");
-                    SW.WriteLine("if exist MCForge_.dll (rename MCForge_.dll MCForge_.dll.backup)");
-                    SW.WriteLine("if exist MCForge.new (rename MCForge.new MCForge_.dll)");
-                    SW.WriteLine("start MCForge.exe");
-                }
-                else
-                {
-                if (!File.Exists("Update.sh"))
-                        SW = new StreamWriter(File.Create("Update.sh"));
-                else
-                {
-                if (File.ReadAllLines("Update.sh")[0] != "#Version 2")
-                       {
-                          SW = new StreamWriter(File.Create("Update.sh"));
-                     }
-                     else
-                     {
-                        SW = new StreamWriter(File.Create("Update_generated.sh"));
-                  }
-                    }
-                    SW.WriteLine("#Version 2");
-                    SW.WriteLine("#!/bin/bash");
-                    SW.WriteLine("kill $2");
-                    SW.WriteLine("rm MCForge_.dll.backup");
-                    SW.WriteLine("mv MCForge_.dll MCForge.dll_.backup");
-                    SW.WriteLine("wget " + DLLLocation);
-                    SW.WriteLine("mono MCForge.exe");
-                }
-
-                SW.Flush(); SW.Close(); SW.Dispose();
-
-                Process proc = Process.GetCurrentProcess();
-                string assemblyname = proc.ProcessName + ".exe";
-
-                WebClient client = new WebClient();
-                Server.selectedrevision = client.DownloadString(Program.CurrentVersionFile);
-                client.Dispose();
-
-                string verscheck = Server.selectedrevision.TrimStart('r');
-               int vers = int.Parse(verscheck.Split('.')[0]);
-                try
-                {
-                    if (File.Exists("MCLawl.new"))
-                        File.Delete("MCLawl.new");
-                    if (File.Exists("Changelog.txt"))
-                        File.Delete("Changelog.txt");
-                    if (File.Exists("MCForge_.update"))
-                        File.Delete("MCForge_.update");
-                    if (File.Exists("MCForge.update"))
-                        File.Delete("MCForge.update");
-                    if (File.Exists("MCForgeCLI.update"))
-                        File.Delete("MCForgeCLI.update");
-                    if (File.Exists("Update.bat"))
-                        File.Delete("Update.bat");
-                    if (File.Exists("Update_generated.bat"))
-                        File.Delete("Update_generated.bat");
-                    if (File.Exists("Update.sh"))
-                        File.Delete("Update.sh");
-                    if (File.Exists("Update_generated.sh"))
-                        File.Delete("Update_generated.sh");
-                }
-                catch { }
-                WebClient Client = new WebClient();
-                Client.DownloadFile(DLLLocation, "MCForge_.update");
-                Client.DownloadFile(EXELocation, "MCForge.update");
-                Client.DownloadFile(CLIEXELocation, "MCForgeCLI.update");
-                Client.DownloadFile(ChangelogLocation, "Changelog.txt");
-
-                // Its possible there are no levels or players loaded yet
-                // Only save them if they exist, otherwise we fail-whale
-                if (Server.levels != null && Server.levels.Any())
-                    foreach (Level l in Server.levels)
-                        if (Server.lava.active && Server.lava.HasMap(l.name)) l.saveChanges();
-                        else l.Save();
-
-                if (Player.players != null && Player.players.Any())
-                    foreach (Player pl in Player.players) pl.save();
-                
-               //File.WriteAllBytes("Updater.exe", MCForge.Properties.Resources.Updater);
-                if (!usingConsole)
-                    Process.Start("Updater.exe", "securitycheck10934579068013978427893755755270374" + parent);
-                else
-                {
-                    Process.Start("mono", parentfullpathdir + "/Updater.exe securitycheck10934579068013978427893755755270374" + parent);
-                }
-                ExitProgram(false);
-            }
-            catch (Exception e) { Server.ErrorLog(e); }
-        }
 
         static public void ExitProgram(bool AutoRestart)
         {

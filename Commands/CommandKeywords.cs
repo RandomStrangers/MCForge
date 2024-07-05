@@ -290,7 +290,6 @@ namespace MCForge.Commands
             new CommandKeywords((new CmdMain2()), "set default map level lvl setmain seth");
             new CommandKeywords((new CmdCCHeartbeat()), "heart classicube server list");
             new CommandKeywords((new CmdUpdate()), "server software mcforge");
-            new CommandKeywords((new CmdBCHeartbeat()), "heart betacraft server list");
             new CommandKeywords((new CmdWhoip()), "who ip info");
             new CommandKeywords((new CmdClones2()), "alts  info");
             new CommandKeywords((new CmdClear()), "clear del player chat");

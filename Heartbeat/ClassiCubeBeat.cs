@@ -27,7 +27,7 @@ namespace MCForge
         {
             get
             {
-                return "https://www.classicube.net/heartbeat.jsp";
+                return "http://www.classicube.net/heartbeat.jsp";
             }
         }
 

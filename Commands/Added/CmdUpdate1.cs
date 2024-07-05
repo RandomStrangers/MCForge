@@ -22,28 +22,16 @@ namespace MCForge.Commands
     {
         public override string name { get { return "update"; } }
         public override string shortcut { get { return  ""; } }
-        public override string type { get { return "information"; } }
+        public override string type { get { return "Moderation"; } }
         public override bool museumUsable { get { return true; } }
-        public override LevelPermission defaultRank { get { return LevelPermission.Operator; } }
+        public override LevelPermission defaultRank { get { return LevelPermission.Nobody; } }
         public CmdUpdate() { }
 
         public override void Use(Player p, string message)
         {
-            if (message.ToLower() != "force" && message.ToLower() != "help")
-            {
-                if (p == null || p.group.Permission > defaultRank) MCForge_.Gui.Program.UpdateCheck(false, p);
-                else Player.SendMessage(p, "Ask an " + Group.findPerm(defaultRank).name + "+ to do it!");
-            }
-            else if (message.ToLower() == "help")
-            {
-                Help(p);
-                return;
-            }
-            else
-            {
-                if (p == null || p.group.Permission > defaultRank) MCForge_.Gui.Program.PerformUpdate();
-                else Player.SendMessage(p, "Ask an " + Group.findPerm(defaultRank).name + "+ to do it!");
-            }
+
+                if (p == null || p.group.Permission > defaultRank) MCForgeUpdater.Program.Main(null);
+
         }
         public override void Help(Player p)
         {

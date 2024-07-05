@@ -30,7 +30,6 @@ namespace MCForge.Commands
         public override void Use(Player p, string message)
         {
             Server.IRC.Reset();
-            Server.OPIRC.Reset();
         }
         public override void Help(Player p)
         {
